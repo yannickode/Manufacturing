@@ -1,0 +1,418 @@
+/* PART 1: The Bar */
+/* ------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  background: #f5f7fa;
+}
+
+/* TOP NAV BAR */
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+
+  background: linear-gradient(
+    90deg,
+    #0f766e,
+    #3b4a66,
+    #be123c
+  );
+
+  color: white;
+}
+
+/* LEFT */
+.nav-left h1 {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* CENTER */
+.nav-center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-btn {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.4);
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.nav-btn:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.nav-select {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255,255,255,0.4);
+  padding: 6px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+/* RIGHT */
+.nav-right {
+  display: flex;
+  align-items: center;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.12);
+  padding: 6px 12px;
+  border-radius: 30px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  background: #facc15;
+  color: #333;
+  font-weight: 800;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.profile-text span {
+  font-size: 12px;
+  opacity: 0.9;
+}
+
+/* MAIN CONTENT */
+.content {
+  padding: 40px;
+}
+/* End Here  */
+/* --------------------------------------- */
+
+/* PART 2: UPLOAD AND MODELS */
+/* -------------------------- */
+:root{
+  --teal:#0f766e;
+  --red:#be123c;
+  --ink:#0b1220;
+  --bg:#f5f7fa;
+  --card:#ffffff;
+  --line:#d7dde6;
+}
+
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:#0b1220;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:10;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 18px;
+  background:linear-gradient(90deg,var(--teal),var(--red));
+  color:#fff;
+}
+.title{font-size:28px;font-weight:800}
+.topbar-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,0.35);
+  background:rgba(255,255,255,0.10);
+  color:#fff;
+  text-decoration:none;
+  font-weight:650;
+}
+
+.profile{gap:12px}
+.avatar{
+  width:34px;height:34px;border-radius:50%;
+  display:grid;place-items:center;
+  background:rgba(0,0,0,0.25);
+  font-weight:800;
+}
+.profile-text .name{font-weight:800;line-height:1}
+.profile-text .role{opacity:.9;font-size:12px;margin-top:2px}
+
+.page{max-width:1050px;margin:22px auto;padding:0 16px}
+.card{
+  background:var(--card);
+  border-radius:18px;
+  border:1px solid var(--line);
+  padding:22px;
+  box-shadow:0 10px 24px rgba(0,0,0,0.06);
+  margin-bottom:18px;
+}
+
+.lead{font-size:18px;line-height:1.6;color:#27324a}
+
+.video-wrap{
+  margin-top:14px;
+  width:100%;
+  border-radius:14px;
+  overflow:hidden;
+  border:1px solid var(--line);
+}
+.video-wrap iframe{
+  width:100%;
+  height:420px;
+  display:block;
+  border:0;
+}
+
+.upload_up{
+  margin-top: 40px;
+}
+
+.row{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+
+.upload-form{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.btn-primary, .btn-secondary{
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(0,0,0,0.15);
+  font-weight:800;
+  cursor:pointer;
+}
+.btn-primary{
+  color:#fff;
+  background:linear-gradient(90deg,var(--teal),var(--red));
+  border:none;
+}
+.btn-secondary{
+  background:#fff;
+}
+
+.preview-box{
+  margin-top:10px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:12px;
+  min-height:76px;
+  background:#fff;
+}
+
+.data-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:6px;
+  font-size:14px;
+}
+.data-table th,.data-table td{
+  border-bottom:1px solid #eef2f6;
+  padding:8px 10px;
+  text-align:left;
+  white-space:nowrap;
+}
+
+.grid-2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+  margin-top:8px;
+}
+label{display:flex;flex-direction:column;gap:6px;font-weight:700}
+input{
+  padding:10px 12px;
+  border-radius:12px;
+  border:1px solid var(--line);
+  font-size:14px;
+}
+small{font-weight:500;color:#56607a}
+
+.btn-row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:14px;
+}
+.pill-btn{
+  padding:10px 16px;
+  border-radius:999px;
+  border:1px solid rgba(15,118,110,0.5);
+  background:#fff;
+  font-weight:900;
+  cursor:pointer;
+}
+.pill-btn.danger{
+  border-color:rgba(190,18,60,0.55);
+}
+
+.plot-box{
+  width:100%;
+  border:1px solid var(--line);
+  border-radius:14px;
+  overflow:hidden;
+  background:#fff;
+  min-height:360px;
+  margin-top:10px;
+}
+
+.table-wrap{overflow:auto;border-radius:14px;border:1px solid var(--line)}
+.metrics-table{width:100%;border-collapse:collapse}
+.metrics-table th,.metrics-table td{padding:10px;border-bottom:1px solid #eef2f6;text-align:left;font-size:14px}
+
+@media (max-width: 900px){
+  .grid-2{grid-template-columns:1fr}
+  .video-wrap iframe{height:220px;}
+}
+/* END HERE */
+/* ------------ */
+
+/* PART 3: HISTOGRAM */
+/* ------------------ */
+.histogram-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+}
+
+.histogram-box {
+  background: #f9fafb;
+  border-radius: 12px;
+  padding: 10px;
+}
+/* END HERE */
+/* ------------ */
+
+
+/* PART 4: GAUGE R&R */
+/* --------------------- */
+
+/* END HERE */
+/* ------------ */
+
+
+
+
+/* ABOUT ME */
+/* ------------ Though it uses the same ID card as index.html */
+.certificate-pdf {
+  width: 100%;
+  height: 520px;
+  border-radius: 14px;
+  border: none;
+}
+
+
+/* =========================
+   IMAGE SLIDERS (About Me)
+   ========================= */
+
+.slider {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: #f3f4f6;
+}
+
+.slider .slide {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.slider .slide.active {
+  opacity: 1;
+}
+
+/* About page layout helpers */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 32px;
+  align-items: center;
+}
+
+.dual-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.tech-block .slider{
+  margin-bottom: 12px;
+  z-index: 1;
+}
+
+.tech-block .video {
+  width: 100%;
+  height: 260px;
+  margin-top: 16px;
+  border-radius: 12px;
+  position: relative;
+  z-index: 2;
+}
+
+.about-text a.btn-primary{
+  display: inline-block;
+  margin-top: 16px;
+}
+.about-text p.first_intro{
+  margin-bottom: 10px;
+}
+
+.about-text p.sec_intro{
+  margin-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .about-grid,
+  .dual-section {
+    grid-template-columns: 1fr;
+  }
+
+  .slider {
+    height: 220px;
+  }
+}

@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me</title>
+
+    <!-- SAME CSS as index.html -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+
+    <body>
+
+        <!-- TOP BAR (same as dashboard for consistency) -->
+        <header class="topbar">
+            <div class="topbar-left">
+            <div class="title">About Me</div>
+            </div>
+            <div class="topbar-right">
+            <!-- <button class="pill" id="dark-mode-btn" type="button">Dark Mode</button> -->
+            <a class="pill" href="/">Data Analysis</a>
+            </div>
+        </header>
+
+        <main class="page">
+                <!-- ========================= -->
+                <!-- ABOUT ME – INTRO SECTION -->
+                <!-- ========================= -->
+                <section class="card about-intro">
+                <div class="about-grid">
+
+                    <!-- PROFILE PHOTO SLIDER -->
+                    <div class="slider" data-slider="intro">
+                        <img src="{{ url_for('static', filename='images/profile1.jpg') }}" class="slide active">
+                        <img src="{{ url_for('static', filename='images/profile2.jpg') }}" class="slide">
+                    </div>
+                    
+                    <!-- INTRO TEXT -->
+                    <div class="about-text">
+                        <h2>About Me</h2>
+
+                        <p class="first_intro">
+                            I am a <strong>Manufacturing and Process Optimization Engineer</strong>.
+                            My career objetcive is to implement, stabilize, and improve complex 
+                            manufacturing systems through <strong>Six Sigma principles</strong>.
+                            
+                        </p>
+
+                        <p class="sec_intro">
+                            My work goes beyond my professional endeavors and can be applied in many life situations. 
+                            It extends to <strong>data-driven applications</strong> (making life changing decisions), <strong>statistical process control</strong>
+                            (allowing continuity, stability, and early defects detection), and <strong>measurement system analysis</strong> (improving systems and identifying root causes). 
+                            Despite sustaining processes, I am also an avid designer for manufacturing systems and mechnical application concepts such as: 
+                            <strong>AutoCAD / SolidWorks</strong> which I continue to use daily. 
+                            Lastly, my life purpose is to educate others about process improvement 
+                            beyond the classroom and numbers, whether suited for personal life or industrial settings.
+                        </p>
+                        <p><strong>Fun fact:</strong> My middle name "Mavita" means "Continuance of Life", from "Ma-" (Maintain) and "-vita" (Vitality, or life in Latin).</p>
+                        <a
+                            href="{{ url_for('static', filename='documents/resume12_18_2025.pdf') }}"
+                            class="btn-primary"
+                            download>
+                            Download Resume
+                        </a>
+                        
+                    </div>
+
+                </div>
+                </section>
+
+                <!-- ====================================== -->
+                <!-- TECHNICAL WORK: NANOMATERIAL + CAD -->
+                <!-- ====================================== -->
+                <section class="card">
+                    <div class="dual-section">
+
+                        <!-- LEFT: NANOMATERIAL SYNTHESIS -->
+                        <div class="tech-block">
+                            <h3>Nanomaterial Synthesis</h3>
+
+                            <div class="slider" data-slider="nano">
+                                <img src="{{ url_for('static', filename='images/nano1.jpg') }}" class="slide active">
+                                <img src="{{ url_for('static', filename='images/nano2.jpg') }}" class="slide">
+                                <img src="{{ url_for('static', filename='images/nano3.jpg') }}" class="slide">
+                                <img src="{{ url_for('static', filename='images/nano4.jpg') }}" class="slide">
+                                <img src="{{ url_for('static', filename='images/nano5.jpg') }}" class="slide">
+                                <img src="{{ url_for('static', filename='images/nano6.jpg') }}" class="slide">
+                                <img src="{{ url_for('static', filename='images/nano7.jpg') }}" class="slide">
+                                <img src="{{ url_for('static', filename='images/nano8.jpg') }}" class="slide">
+                            </div>
+                            <p>These are actual images of my laboratory synthesis research. 
+                                In this video, I talk about my role, experience, and challenges faced.</p>
+                            <iframe
+                                class="video"
+                                src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                                title="Nanomaterial Research"
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+
+                        <!-- RIGHT: CAD / SOLIDWORKS -->
+                        <div class="tech-block">
+                            <h3>AutoCAD / SolidWorks Design</h3>
+
+                            <div class="slider" data-slider="cad">
+                                <img src="{{ url_for('static', filename='images/cad1.png') }}" class="slide active">
+                                <img src="{{ url_for('static', filename='images/cad2.png') }}" class="slide">
+                                <img src="{{ url_for('static', filename='images/cad3.png') }}" class="slide">
+                            </div>
+                            <p>More designs can be found on my YouTube Page!
+                               For more questions, please contact me at Nick936gmt@gmail.com.
+                            </p>
+                            <video class="video" controls>
+                                <source
+                                src="{{ url_for('static', filename='videos/cnc_video.mp4') }}"
+                                type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+
+                    </div>
+                </section>
+
+                <!-- ================================= -->
+                <!-- SIX SIGMA CERTIFICATION -->
+                <!-- ================================= -->
+                <section class="card">
+                    <h3>Six Sigma Yellow Belt Certification</h3>
+
+                    <iframe
+                        src="{{ url_for('static', filename='documents/Six_Sigma_Yellow_Belt.pdf') }}"
+                        class="certificate-pdf"
+                        title="Six Sigma Yellow Belt Certificate">
+                    </iframe>
+                </section>
+
+        </main>
+
+        <!-- Slider JS MUST be loaded at the bottom -->
+         <script src="{{ url_for('static', filename='theme.js') }}"></script>
+        <script src="{{ url_for('static', filename='main.js') }}"></script>
+
+    </body>
+</html>

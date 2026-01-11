@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- PART 1: Begin Here  -->
+<!-- ------------------- -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Data Analysis</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+  <!-- Plotly (must load before main.js uses it) -->
+  <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="title">Data Analysis</div>
+    </div>
+    <div class="topbar-right">
+      <a class="pill" href="/about">About Me</a>
+      <!-- <select class="pill">
+        <option>EN</option>
+      </select> -->
+      <!-- <button class="pill" id="dark-mode-btn" type="button">Dark Mode</button> -->
+      <div class="profile pill">
+        <div class="avatar">Y</div>
+        <div class="profile-text">
+          <div class="name">Yannick Iniatius Mavita Gata</div>
+          <div class="role">Manufacturing Engineer</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <!-- ========================= -->
+    <!-- MODE OF INSTRUCTION -->
+    <!-- ========================= -->
+    <section class="card">
+      <h2> 1] Mode of Instruction</h2>
+      <p class="lead">
+        This dashboard was built to serve as an educational, industry-related manufacturing SPC instruments.
+        It includes control charts, process capability (Cp &amp; Cpk), some data mining, and measurement system analysis.
+        Below I have attached an embedded, short YouTube video to help you use it. In addition, prior knowledge is necessary to understand some concepts, 
+        but not required for usage.
+        For more questions, please email me at Nick936gmt@gmail.com. 
+        *For privacy and protection, the owner has limited access to this video for certain regions. 
+        However, this should not prevent you from getting access to it.*
+      </p>
+
+      <div class="video-wrap">
+        <iframe
+          src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+          title="Dashboard Walkthrough"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    
+
+      <!-- PART 2: UPLOAD AND MODELS -->
+      <!-- -------------------------- -->
+
+      <!-- ========================= -->
+      <!-- UPLOAD DATA -->
+      <!-- ========================= -->
+      <h2 class="upload_up"> 2] Upload Data</h2>
+
+      <div class="row">
+        <form id="upload-form" class="upload-form">
+          <input id="datafile" type="file" name="datafile" accept=".csv,.xlsx" required />
+          <button id="upload-btn" type="submit" class="btn-primary">Load CSV / Excel</button>
+        </form>
+
+        <button id="example-btn" type="button" class="btn-secondary">Use Example Dataset</button>
+      </div>
+
+      <h3>Data Preview</h3>
+      <div id="preview" class="preview-box">
+        <p>No data loaded yet.</p>
+      </div>
+    
+
+      <!-- ========================= -->
+      <!-- MODELS -->
+      <!-- ========================= -->
+      <h2 class="upload_up"> 3] Models</h2>
+
+      <div class="grid-2">
+
+        <label>
+          Feature columns(comma separated)
+          <select id="features-select" multiple size="6"></select>
+          <small>Hold Ctrl (Windows) or Cmd (Mac) to select multiple features.</small>
+          <small>Tip: First "feature" is used as x-axis and "target" as y-axis. 
+            For 3D adding a third feature enables 3D plot following the structure (x,y,z) for Feature inserted box.</small>
+        </label>
+
+        <label>
+          Target column(for LR/SVM/NN/KNN)
+          <select id="target-select">
+            <option value="">-- None (for clustering) --</option>
+          </select>
+          <small>Target insert box serves as y-axis and can also be used for clustering.</small>
+        </label>
+        
+
+        <label>
+          Number of clusters
+          <input id="clusters-input" type="number" value="3" min="2" />
+        </label>
+
+        <label>
+          K for KNN
+          <input id="knn-input" type="number" value="5" min="1" />
+        </label>
+      </div>
+
+      <div class="btn-row">
+        <button class="pill-btn" id="btn-lr" type="button">Linear Regression</button>
+        <button class="pill-btn" id="btn-svm" type="button">SVM</button>
+        <button class="pill-btn" id="btn-cluster" type="button">Clusters</button>
+        <button class="pill-btn" id="btn-nn" type="button">Neural Network</button>
+        <button class="pill-btn" id="btn-knn" type="button">KNN</button>
+        <button class="pill-btn danger" id="btn-reset" type="button">Reset Plot</button>
+      </div>
+
+      <div class="model-result">
+        <h3>Model Result</h3>
+
+        <div class="table-wrap">
+          <table class="metrics-table">
+            <thead>
+              <tr>
+                <th>Model</th>
+                <th>RMSE</th>
+                <th>MAE</th>
+                <th>R²</th>
+                <th>Notes</th>
+              </tr>
+            </thead>
+            <tbody id="metrics-body">
+              <tr><td colspan="5">No model trained yet.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 style="margin-top:18px;">2D Interactive Plot</h3>
+        <div id="plot-2d" class="plot-box"></div>
+
+        <h3 style="margin-top:18px;">3D Plot (only if 3 features)</h3>
+        <div id="plot-3d" class="plot-box"></div>
+      </div>
+    
+
+      <!-- PART 3: HISTOGRAM -->
+      <h2 class="upload_up"> 4] Feature Distributions (Histograms)</h2>
+
+      <p class="section-desc">
+        Histograms are generated for each inserted selected feature.
+        Check for skewness, variation, and data distribution.
+      </p>
+
+      <button id="btn-histogram" class="pill-btn">
+        Generate Histograms
+      </button>
+
+
+      <div id="histogram-container" class="histogram-grid">
+        <p>No histograms generated yet.</p>
+      </div>
+    
+
+      <!-- PART 4: GAUGE R&R OVERVIEW -->
+      <!-- ---------------------------- -->
+      <h2 class="upload_up"> 5] Gauge R&R – Measurement System Analysis</h2>
+
+      <button id="btn-gauge" class="pill-btn">
+        Run Gauge R&R
+      </button>
+
+      <div id="gauge-rr-results">
+        <p>No Gauge R&R analysis performed yet.</p>
+      </div>
+
+      <!-- CONTROL CHART LIMITS  -->
+      <!-- ------------------------- -->
+      <h2 class="upload_up"> 6] Control Chart Limits (Study)</h2>
+
+      <p class="section-desc">
+        In this section, control limits are calculated directly from the same dataset.
+      </p>
+
+      <div class="formula-box">
+        <p><strong>Formulas:</strong></p>
+        <p>X̄̄ = average of subgroup means</p>
+        <p>R̄ = average of subgroup ranges</p>
+        <p>UCL<sub>X̄</sub> = X̄̄ + A₂ · R̄</p>
+        <p>LCL<sub>X̄</sub> = X̄̄ − A₂ · R̄</p>
+      </div>
+
+      <button id="btn-control-limits" class="pill-btn">
+        Generate Control Chart Limits
+      </button>
+
+      <div id="control-limits-table" class="table-wrap">
+        <p>No control chart study generated yet.</p>
+      </div>
+
+      <!-- PROCESS CAPABILITY (Cp & Cpk) -->
+      <!-- ------------------------------- -->
+      <h2 class="upload_up"> 7] Process Capability (Cp & Cpk)</h2>
+
+      <div class="grid-2">
+        <label>
+          LSL
+          <input id="lsl-input" type="number" step="any" placeholder="e.g. 48.0">
+        </label>
+
+        <label>
+          USL
+          <input id="usl-input" type="number" step="any" placeholder="e.g. 52.0">
+        </label>
+      </div>
+
+      <button id="btn-cpk" class="pill-btn">
+        Calculate Cp & Cpk
+      </button>
+      <div id="cpk-histogram" class="plot-box"></div>
+
+      <div id="cpk-results">
+        <p>No Cp/Cpk calculation performed yet.</p>
+      </div>
+      <p>
+      ..........................................
+      </p>
+      <div class="interpretation">
+        <h4>How to interpret:</h4>
+        <ul>
+          <li><strong>Statistical Control:</strong> No special causes, stable variation.</li>
+          <li><strong>Capable:</strong> Cp &amp; Cpk ≥ 1.33 (typical industry target).</li>
+          <li><strong>Centered:</strong> Cp ≈ Cpk (process mean near spec center).</li>
+        </ul>
+      </div>
+
+      <h2 class="upload_up"> 8] X̄–R Control Chart</h2>
+
+      <button class="pill-btn" onclick="renderXRChart()">
+        Generate X̄–R Chart
+      </button>
+
+      <div id="xr-chart" class="plot-box"></div>
+
+    </section>
+
+  </main>
+
+  <!-- Your JS goes LAST so buttons always bind correctly -->
+  <script src="{{ url_for('static', filename='theme.js') }}"></script>
+  <script src="{{ url_for('static', filename='main.js') }}"></script>
+
+
+  
+</body>
+</html>
