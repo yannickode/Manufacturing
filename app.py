@@ -16,6 +16,10 @@ from sklearn.cluster import KMeans
 from sklearn.metrics import mean_squared_error, mean_absolute_error
 from sklearn.datasets import make_regression
 
+import os
+os.environ["OMP_NUM_THREADS"] = "1"
+
+
 app = Flask(__name__)
 # PART 1: For the Bar, not yet!
 # -----------------------------
